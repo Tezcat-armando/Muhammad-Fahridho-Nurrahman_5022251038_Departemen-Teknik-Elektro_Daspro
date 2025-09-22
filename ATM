@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    const char correctPIN[] = "1234"; // Default PIN
+    char enteredPIN[5];
+    int attempts = 3;
+    float balance = 1000000.0; // Initial balance
+    int choice;
+    float amount;
+    char accountNumber[20];
+
+    // PIN Verification
+    while (attempts > 0) {
+        printf("Enter your PIN: ");
+        scanf("%4s", enteredPIN);
+        
+        if (strcmp(enteredPIN, correctPIN) == 0) {
+            break;
+        } else {
+            attempts--;
+            printf("Incorrect PIN. %d attempts remaining.\n", attempts);
+            if (attempts == 0) {
+                printf("Card blocked. Please contact bank.\n");
+                return 0;
+            }
+        }
+    }
+
+    // Main Menu
+    do {
+        printf("\n==== ATM Menu ====\n");
+        printf("1. Check Balance\n");
+        printf("2. Deposit\n");
+        printf("3. Withdraw\n");
+        printf("4. Transfer\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: // Check Balance
+                printf("Current balance: Rp%.2f\n", balance);
+                break;
+
+            case 2: // Deposit
+                printf("Enter deposit amount: ");
+                scanf("%f", &amount);
+                if (amount >= 50000) {
+                    balance += amount;
+                    printf("Deposit successful. New balance: Rp%.2f\n", balance);
+                } else {
+                    printf("Minimum deposit is Rp50,000\n");
+                }
+                break;
+
+            case 3: // Withdraw
+                printf("Enter withdrawal amount: ");
+                scanf("%f", &amount);
+                if (amount < 50000) {
+                    printf("Minimum withdrawal is Rp50,000\n");
+                } else if (amount > balance) {
+                    printf("Insufficient balance\n");
+                } else {
+                    balance -= amount;
+                    printf("Withdrawal successful. New balance: Rp%.2f\n", balance);
+                }
+                break;
+
+            case 4: // Transfer
+                printf("Enter recipient account number: ");
+                scanf("%s", accountNumber);
+                printf("Enter transfer amount: ");
+                scanf("%f", &amount);
+                if (amount > balance) {
+                    printf("Insufficient balance\n");
+                } else {
+                    balance -= amount;
+                    printf("Transfer successful to account %s\n", accountNumber);
+                    printf("New balance: Rp%.2f\n", balance);
+                }
+                break;
+
+            case 5: // Exit
+                printf("Thank you for using our ATM!\n");
+                break;
+
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}
