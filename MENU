@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+    int choice, total = 0;
+    // main menu //
+    do {
+        printf("FIRDO MENU\n");
+        printf("1. Fried Rice: Rp15,000\n");
+        printf("2. Chiken Noodles: Rp12,000\n");
+        printf("3. Chicken Satay: Rp20,000\n");
+        printf("4. Finish ordering\n");
+        printf("5. Exit\n");
+        printf("Enter a Number: \n");
+        scanf("%d", &choice);
+
+        switch (choice) {
+        case 1:
+            total += 15000;
+            printf("your total is: %d\n", total);
+            break;
+
+        case 2:
+            total += 12000;
+            printf("your total is: %d\n", total);
+            break;
+
+        case 3:
+            total += 20000;
+             printf("your total is: %d\n", total);
+            break;
+
+        case 4: 
+            if (total >= 50000) {
+                float discount = total * 0.10;
+                total -= discount;
+                printf("your total is: %d, pay up\n", total);
+                return 0;
+            } else {
+                printf("your total is: %d, pay up\n", total);
+                return 0;
+            }
+            break;
+
+        default:
+            printf("Invalid option\n");
+            continue;
+        }
+
+    } while (choice != 5);
+    printf("Thanks You!");
+    return 0;
+}
