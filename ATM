@@ -10,7 +10,6 @@ int main() {
     float amount;
     char accountNumber[20];
 
-    // PIN Verification
     while (attempts > 0) {
         printf("Enter your PIN: ");
         scanf("%4s", enteredPIN);
@@ -21,13 +20,12 @@ int main() {
             attempts--;
             printf("Incorrect PIN. %d attempts remaining.\n", attempts);
             if (attempts == 0) {
-                printf("Card blocked. Please contact bank.\n");
+                printf("Card blocked.\n");
                 return 0;
             }
         }
     }
 
-    // Main Menu
     do {
         printf("\n==== ATM Menu ====\n");
         printf("1. Check Balance\n");
@@ -35,15 +33,15 @@ int main() {
         printf("3. Withdraw\n");
         printf("4. Transfer\n");
         printf("5. Exit\n");
-        printf("Enter your choice: ");
+        printf("Enter Command: ");
         scanf("%d", &choice);
 
         switch (choice) {
-            case 1: // Check Balance
+            case 1:
                 printf("Current balance: Rp%.2f\n", balance);
                 break;
 
-            case 2: // Deposit
+            case 2: 
                 printf("Enter deposit amount: ");
                 scanf("%f", &amount);
                 if (amount >= 50000) {
@@ -54,7 +52,7 @@ int main() {
                 }
                 break;
 
-            case 3: // Withdraw
+            case 3: 
                 printf("Enter withdrawal amount: ");
                 scanf("%f", &amount);
                 if (amount < 50000) {
@@ -67,8 +65,8 @@ int main() {
                 }
                 break;
 
-            case 4: // Transfer
-                printf("Enter recipient account number: ");
+            case 4: 
+                printf("Enter transfer account number: ");
                 scanf("%s", accountNumber);
                 printf("Enter transfer amount: ");
                 scanf("%f", &amount);
@@ -82,7 +80,7 @@ int main() {
                 break;
 
             case 5: // Exit
-                printf("Thank you for using our ATM!\n");
+                printf("Thank you for using Firdo ATM!\n");
                 break;
 
             default:
