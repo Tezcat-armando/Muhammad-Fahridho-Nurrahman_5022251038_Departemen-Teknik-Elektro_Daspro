@@ -1,0 +1,93 @@
+#include <stdio.h>
+
+void awalPapan(char papan[6][7]);
+void printPapan(char papan[6][7]);
+int Jatuh(char papan[6][7], int col, char simbol);
+int Menang(char papan[6][7], int col, int row, char simbol);
+int Penuh(char papan[6][7]);
+
+int main{
+    char papan[6][7];
+    int kondisi=0;
+    int giliran=1;
+
+
+    awalPapan(papan[6][7]);
+
+    printf("===== W3LC0M3 T0 C0NN3CT F0UR =====\n");
+    printf("Player 1 : X\n");
+    printf("Player 2 : O\n");
+    printf("Masukkan Nomor 1-7 Untuk Memilih Kolom\n");
+
+
+    while(kondisi == 0){
+        char simbol;
+        int col;
+        printPapan(papan[6][7]);
+        if (giliran == 1) {
+            simbol = 'X';
+        } else {
+            simbol = 'O';
+        }
+        
+        while (1){
+            printf("Pemain %d (%c), pilih kolom 1-7: ", giliran, simbol);
+            
+            if ( scanf("%d",col) != 1) {
+            printf("Input tidak valid\n");
+            while (getchar() != '\n');
+            continue;
+            }
+            if (col < 1 || col > 7) {
+                printf("Input Harus Diantara 1-7");
+                continue;
+            }
+            break;
+        }
+        
+        col--:
+        int row =  Jatuh(papan[6][7], col, simbol);
+        if (row == -1){
+            printf("Kolom %d penuh!", col+1);
+            continue;
+        }
+    }
+    return 0;
+}
+
+
+void awalPapan(char papan[6][7]){
+    for(int i = 0; i < 6; i++){
+        for(int j = 0; j < 7; j++){
+            papan[i][j] = ' ';
+        }
+    }
+}
+
+void printPapan(char papan[6][7]){
+    printf("\n");
+    for(int i = 0; i < 6; i++){
+        for(int j = 0; j < 7; j++){
+            printf("| %c ", papan[i][j]);
+        }
+        printf("|\n");
+
+        if (i < 6){
+            for (int j = 0; j < 7; j++){
+                printf("+---");
+            }
+            printf("+\n");
+        }
+    }
+    printf("  1   2   3   4   5   6   7");
+}
+
+int Jatuh(char papan[6][7], int col, char simbol){
+    for (int i = ROWS - 1; i >= 0; i--) {
+        if (board[i][col] == ' ') {
+            board[i][col] = player;
+            return i; 
+        }
+    }
+    return -1;
+}
